@@ -25,24 +25,23 @@ class Coverage:
 
         x = 0
         y = 0
+        retval = []
 
         for i,values in enumerate(Coverage.originCoverage):
             if ( itemVal in values):
                 y = values.index(itemVal)
                 x = i
-                break
-        if (x == 0 and  y == 0) :
-            return False
-        else:
-            return (x,y)
+                retval.append((x,y))
+
+        return retval
     
-    def checkCoverage(self,itemCase):
+    def checkCoverage(self,itemCaseFromFull):
         retval = []
-        combinations_case = list(itertools.combinations(itemCase,2))
+        combinations_case = list(itertools.combinations(itemCaseFromFull,2))
         for i in combinations_case:
             searchResult = self.searchCoverageItem(i)
             if (searchResult):
-                retval.append(searchResult)
+                retval = retval + searchResult
         
         return retval
 
@@ -50,11 +49,13 @@ class Coverage:
 
 
 
-parameters = [ [ "Brand X", "Brand Y","Brand A","Brand B","Brand C","Brand D" ]
-             , [ "98", "NT", "2000", "XP"]
+parameters = [ [ "Brand X", "Brand Y","Brand A" ]
+             , [ "win98", "NT", "2000", "XP"]
              , [ "Internal", "Modem" ],
              [56,45,22,34],
              ]
+
+#parameters = [ ["a", "b"], [1,2],['x','y']]
 
 fullcomb = list(itertools.product(*parameters))
 
@@ -65,6 +66,48 @@ pairCovArray = []
 
 for i in pairCoverage:
     pairCovArray.append(list(itertools.product(*i)))
+
+
+for kkk in pairCovArray:
+    print(kkk)
+
+print('/n/n/n')
+
+for kkkk in fullcomb:
+    print(kkkk)
+
+print('\n\n\n')
+
+### 전체 조합을 가지고 커버리지 체크하면서 커버리지는 삭제함. 커버리지에 들어가면 index를 저장. 아니면 skip ###
+
+coverageObj = Coverage(pairCovArray)
+
+selectedCaseIndex = []
+remainedCoverage = 1
+
+for selectedIndex, value in enumerate(fullcomb):
+    bingo = coverageObj.checkCoverage(value)
+
+    if (any(bingo)):
+        selectedCaseIndex.append(selectedIndex)
+        for items in bingo:
+            if items:
+                remainedCoverage =  coverageObj.updateCoverage(items)
+    
+    if remainedCoverage == 0:
+        break
+
+print(selectedCaseIndex)
+
+print("\n\n\n")
+print(coverageObj.originCoverage)
+print("\n\n\n")
+
+for k in selectedCaseIndex:
+    print(fullcomb[k])
+
+
+
 
 
 
