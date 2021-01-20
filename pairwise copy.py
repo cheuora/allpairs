@@ -49,13 +49,13 @@ class Coverage:
 
 
 
-parameters = [ [ "Brand X", "Brand Y","Brand A" ]
-             , [ "NT", "2000", "XP"]
-             , [ "Internal", "Modem" ],
-             [56,45],
-             ]
+# parameters = [ [ "Brand X", "Brand Y","Brand A" ]
+#              , [ "win98", "NT", "2000", "XP"]
+#              , [ "Internal", "Modem" ],
+#              [56,45,22,34],
+#              ]
 
-# parameters = [ ["a", "b"], [1,2],['x','y', 'z']]
+parameters = [ ["a", "b"], [1,2],['x','y', 'z']]
 
 fullcomb = list(itertools.product(*parameters))
 

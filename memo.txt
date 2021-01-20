@@ -1,0 +1,19 @@
+[('Brand X', 'XP'), ('Brand Y', 'NT'), ('Brand Y', '2000'), ('Brand Y', 'XP'), ('Brand A', 'NT'), ('Brand A', '2000'), ('Brand A', 'XP')]
+[  ('Brand Y', 'Internal'), ('Brand Y', 'Modem'), ('Brand A', 'Internal'), ('Brand A', 'Modem')]
+[  ('Brand Y', 56), ('Brand Y', 45), ('Brand A', 56), ('Brand A', 45)]
+[ ('NT', 'Modem'), ('2000', 'Internal'), ('XP', 'Internal'), ('XP', 'Modem')]
+[('NT', 45), ('2000', 56),  ('XP', 56), ('XP', 45)]
+[ ('Internal', 45), ('Modem', 56)]
+
+
+('Brand X', 'NT')('Brand X', 'Internal') : {'Brand X', 'Internal', 'NT'} : [('Brand X', 'Internal'), ('Brand X', 'NT'), ('Internal', 'NT')]
+
+
+('Brand X', 'NT')+ ('Brand X', 'Internal') + ('Brand X', 56) : [(56, 'NT'), (56, 'Internal'), (56, 'Brand X'), ('NT', 'Internal'), ('NT', 'Brand X'), ('Internal', 'Brand X')]
+
+
+('Brand X', '2000') + ('Brand X', 'Modem')+('Brand X', 45) : [('Modem', 'Brand X'), ('Modem', 45), ('Modem', '2000'), ('Brand X', 45), ('Brand X', '2000'), (45, '2000')]
+
+('Brand Y', 'NT') + ('Brand Y', 'Internal') + ('Brand Y', 56) : [('Brand Y', 56), ('Brand Y', 'Internal'), ('Brand Y', 'NT'), (56, 'Internal'), (56, 'NT'), ('Internal', 'NT')]. Fail
+
+('Brand Y', '2000') + ('Brand Y', 'Internal') + ('Brand Y', 56) : [(56, 'Brand Y'), (56, 'Internal'), (56, '2000'), ('Brand Y', 'Internal'), ('Brand Y', '2000'), ('Internal', '2000')] : Fail
