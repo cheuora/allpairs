@@ -1,11 +1,14 @@
-import itertools
+from pypair import pypair
 
-input = ('Brand X', '2000')+('2000', 'Modem') + ('Modem', 45)
+parameters = [ [ "Brand X", "Brand Y","Brand A" ]
+             , [ "NT", "2000", "XP"]
+             , [ "Internal", "Modem" ]
+             , ['This', 'That']
+             ]
 
-print(input)
 
-kkk = set(input)
-print(kkk)
+test = pypair(parameters,2)
 
-l = list(itertools.combinations(kkk,2))
-print(l)
+for i in test:
+    print(i)
+

@@ -47,18 +47,18 @@ class Coverage:
         return retval
 
 
-# parameters = [ [ "Brand X", "Brand Y","Brand A" ]
-#              , [ "NT", "2000", "XP"]
-#              , [ "Internal", "Modem" ],
-#              [56,45],
-#              ]
-
-parameters = [ [ "Stick"]
-             , [ "P1", "P2", "P3"]
-             , [ "DC_On"],
-             ["Ac_On"],
-             ['Movie', 'Music']
+parameters = [ [ "Brand X", "Brand Y","Brand A" ]
+             , [ "NT", "2000", "XP"]
+             , [ "Internal", "Modem" ],
+             [56,45],
              ]
+
+# parameters = [ [ "Stick"]
+#              , [ "P1", "P2", "P3"]
+#              , [ "DC_On"],
+#              ["Ac_On"],
+#              ['Movie', 'Music']
+#              ]
 
 
 
@@ -89,7 +89,7 @@ print('\n\n\n')
 
 ### 전체 조합을 가지고 커버리지 체크하면서 커버리지는 삭제함. 커버리지에 들어가면 index를 저장. 아니면 skip ###
 
-coverageObj = Coverage(getCoverage(parameters,1), 1)
+coverageObj = Coverage(getCoverage(parameters,2), 2)
 
 
 def executor(threshold):
