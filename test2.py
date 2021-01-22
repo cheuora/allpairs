@@ -1,6 +1,6 @@
 import itertools
 
-input = ('Brand Y', '2000') + ('Brand Y', 'Internal') + ('Brand Y', 56) 
+input = ('Brand X', '2000')+('2000', 'Modem') + ('Modem', 45)
 
 print(input)
 

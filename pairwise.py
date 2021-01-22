@@ -50,7 +50,7 @@ class Coverage:
 
 
 parameters = [ [ "Brand X", "Brand Y","Brand A" ]
-             , [ "NT", "2000", "XP"]
+             , [ "NT", "2000", "XP", "98"]
              , [ "Internal", "Modem" ],
              [56,45],
              ]
@@ -82,30 +82,47 @@ print('\n\n\n')
 
 coverageObj = Coverage(pairCovArray)
 
-selectedCaseIndex = []
-remainedCoverage = 1
+def executor(threshold):
+    remainedCoverage = 1
+    selectedCaseIndex = []
+    ret_cases = []
 
-for selectedIndex, value in enumerate(fullcomb):
-    bingo = coverageObj.checkCoverage(value)
+    for i in range(threshold,0, -1):
+        selectedCaseIndex = []
+        for selectedIndex, value in enumerate(fullcomb):
 
-    if (any(bingo)):
-        selectedCaseIndex.append(selectedIndex)
-        for items in bingo:
-            if items:
-                remainedCoverage =  coverageObj.updateCoverage(items)
-    
-    if remainedCoverage == 0:
-        break
+            bingo = coverageObj.checkCoverage(value)
+            if (len(bingo) == i):
+                selectedCaseIndex.append(selectedIndex)
+                for items in bingo:
+                    if items:
+                        remainedCoverage =  coverageObj.updateCoverage(items)
 
-print(selectedCaseIndex)
 
-print("\n\n\n")
-print(coverageObj.originCoverage)
-print("\n\n\n")
+        for case_index in selectedCaseIndex:
+            ret_cases.append(fullcomb[case_index])
+        
+        if (remainedCoverage == 0):
+            break
 
-for k in selectedCaseIndex:
-    print(fullcomb[k])
+        for ele in sorted(selectedCaseIndex, reverse = True): 
+            # fullcomb업데이트 :  
+            del fullcomb[ele] 
+        
+    return ret_cases
 
+
+Test_cases = executor(len(parameters) + 2)
+
+
+
+print("========RESULT===========")
+
+for i in Test_cases:
+    print(i)
+
+
+print("==========END===========")
 
 
 
@@ -118,7 +135,7 @@ for k in selectedCaseIndex:
 
 # print(fullcomb[1])
 
-temp = list(itertools.combinations(fullcomb[1],2))
+# temp = list(itertools.combinations(fullcomb[1],2))
 # print(temp)
 
 # print(temp[0] in pairCovArray[0])
