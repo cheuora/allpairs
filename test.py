@@ -10,10 +10,35 @@ parameters = [ [ "Brand X", "Brand Y","Brand A" ]
 
 
 def test_twoway():
-    assert pypair(parameters,2) == [('Brand X', 'NT', 'Internal', 'This'), ('Brand X', '2000', 'Modem', 'That'), ('Brand Y', 'XP', 'Internal', 'That'), ('Brand A', 'XP', 'Modem', 'This'), ('Brand Y', 'NT', 'Modem', 'This'), ('Brand A', 'NT', 'Internal', 'That'), ('Brand Y', '2000', 'Internal', 'This'), ('Brand X', 'XP', 'Internal', 'This'), ('Brand A', '2000', 'Internal', 'This')]
+    assert pypair(parameters,2) == [('Brand X', 'NT', 'Internal', 'This')
+                                    , ('Brand X', '2000', 'Modem', 'That')
+                                    , ('Brand Y', 'XP', 'Internal', 'That')
+                                    , ('Brand A', 'XP', 'Modem', 'This')
+                                    , ('Brand Y', 'NT', 'Modem', 'This')
+                                    , ('Brand A', 'NT', 'Internal', 'That')
+                                    , ('Brand Y', '2000', 'Internal', 'This')
+                                    , ('Brand X', 'XP', 'Internal', 'This')
+                                    , ('Brand A', '2000', 'Internal', 'This')]
 
 def test_threeway():
-    assert pypair(parameters,3) == [('Brand X', 'NT', 'Internal', 'This'), ('Brand X', 'NT', 'Modem', 'That'), ('Brand X', '2000', 'Internal', 'That'), ('Brand X', '2000', 'Modem', 'This'), ('Brand Y', 'NT', 'Internal', 'That'), ('Brand Y', 'NT', 'Modem', 'This'), ('Brand Y', '2000', 'Internal', 'This'), ('Brand Y', '2000', 'Modem', 'That'), ('Brand A', 'XP', 'Internal', 'This'), ('Brand A', 'XP', 'Modem', 'That'), ('Brand X', 'XP', 'Internal', 'That'), ('Brand X', 'XP', 'Modem', 'This'), ('Brand A', 'NT', 'Internal', 'That'), ('Brand A', 'NT', 'Modem', 'This'), ('Brand Y', 'XP', 'Internal', 'This'), ('Brand Y', 'XP', 'Modem', 'That'), ('Brand A', '2000', 'Internal', 'This'), ('Brand A', '2000', 'Modem', 'That')]
+    assert pypair(parameters,3) == [('Brand X', 'NT', 'Internal', 'This')
+                                    , ('Brand X', 'NT', 'Modem', 'That')
+                                    , ('Brand X', '2000', 'Internal', 'That')
+                                    , ('Brand X', '2000', 'Modem', 'This')
+                                    , ('Brand Y', 'NT', 'Internal', 'That')
+                                    , ('Brand Y', 'NT', 'Modem', 'This')
+                                    , ('Brand Y', '2000', 'Internal', 'This')
+                                    , ('Brand Y', '2000', 'Modem', 'That')
+                                    , ('Brand A', 'XP', 'Internal', 'This')
+                                    , ('Brand A', 'XP', 'Modem', 'That')
+                                    , ('Brand X', 'XP', 'Internal', 'That')
+                                    , ('Brand X', 'XP', 'Modem', 'This')
+                                    , ('Brand A', 'NT', 'Internal', 'That')
+                                    , ('Brand A', 'NT', 'Modem', 'This')
+                                    , ('Brand Y', 'XP', 'Internal', 'This')
+                                    , ('Brand Y', 'XP', 'Modem', 'That')
+                                    , ('Brand A', '2000', 'Internal', 'This')
+                                    , ('Brand A', '2000', 'Modem', 'That')]
 
 
 # def test_searchCoverageItem(ttt):
