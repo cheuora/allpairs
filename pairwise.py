@@ -9,8 +9,9 @@ def itemCount2by2(array):
 
 class Coverage:
     originCoverage = ''
-    def __init__(self, coverageAll):
+    def __init__(self, coverageAll, num_of_way):
         Coverage.originCoverage = coverageAll
+        self.num_of_way = num_of_way
         pass
 
     def updateCoverage(self,coordinate):
@@ -37,7 +38,7 @@ class Coverage:
     
     def checkCoverage(self,itemCaseFromFull):
         retval = []
-        combinations_case = list(itertools.combinations(itemCaseFromFull,2))
+        combinations_case = list(itertools.combinations(itemCaseFromFull,self.num_of_way))
         for i in combinations_case:
             searchResult = self.searchCoverageItem(i)
             if (searchResult):
@@ -46,30 +47,38 @@ class Coverage:
         return retval
 
 
+# parameters = [ [ "Brand X", "Brand Y","Brand A" ]
+#              , [ "NT", "2000", "XP"]
+#              , [ "Internal", "Modem" ],
+#              [56,45],
+#              ]
 
-
-
-parameters = [ [ "Brand X", "Brand Y","Brand A" ]
-             , [ "NT", "2000", "XP", "98"]
-             , [ "Internal", "Modem" ],
-             [56,45],
+parameters = [ [ "Stick"]
+             , [ "P1", "P2", "P3"]
+             , [ "DC_On"],
+             ["Ac_On"],
+             ['Movie', 'Music']
              ]
+
+
 
 # parameters = [ ["a", "b"], [1,2],['x','y', 'z']]
 
 fullcomb = list(itertools.product(*parameters))
 
 
-pairCoverage = list(itertools.combinations(parameters,2))
+def getCoverage(parameters, way):
+    pairCoverage = list(itertools.combinations(parameters,way))
+    pairCovArray = []
+    for i in pairCoverage:
+        pairCovArray.append(list(itertools.product(*i)))
+    
+    return pairCovArray
 
-pairCovArray = []
 
-for i in pairCoverage:
-    pairCovArray.append(list(itertools.product(*i)))
+# for kkk in pairCovArray:
+#     print(kkk)
 
-
-for kkk in pairCovArray:
-    print(kkk)
 
 print('/n/n/n')
 
@@ -80,7 +89,8 @@ print('\n\n\n')
 
 ### 전체 조합을 가지고 커버리지 체크하면서 커버리지는 삭제함. 커버리지에 들어가면 index를 저장. 아니면 skip ###
 
-coverageObj = Coverage(pairCovArray)
+coverageObj = Coverage(getCoverage(parameters,1), 1)
+
 
 def executor(threshold):
     remainedCoverage = 1
