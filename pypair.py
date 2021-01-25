@@ -46,10 +46,10 @@ def executor(fullcomb, coverageObj):
 
 class Coverage:
     originCoverage = ''
-    def __init__(self, coverageAll, num_of_way):
+    def __init__(self, coverageAll, num_of_way, filter):
         Coverage.originCoverage = coverageAll
         self.num_of_way = num_of_way
-        pass
+        self.filter = filter
 
     def updateCoverage(self,coordinate):
         # 인덱스(x,y)에 맞는 커버리지 list배열(2x2)배열을 삭제 및 업데이트
@@ -72,22 +72,37 @@ class Coverage:
                 retval.append((x,y))
 
         return retval
+    def checkFilter(self, one_combinations_case):
+        try:
+            tmp = self.filter[one_combinations_case[0]]
+            isIn = tmp.count(one_combinations_case[1])
+            if isIn > 0 :
+                return False
+            
+        except KeyError:
+            pass
     
+        return True
+
     def checkCoverage(self,itemCaseFromFull):
         retval = []
         combinations_case = list(itertools.combinations(itemCaseFromFull,self.num_of_way))
+        #필터 적용해야 한다.
         for i in combinations_case:
-            searchResult = self.searchCoverageItem(i)
-            if (searchResult):
-                retval = retval + searchResult
+            if self.checkFilter(i):
+                searchResult = self.searchCoverageItem(i)
+                if (searchResult):
+                    retval = retval + searchResult
+            else:
+                pass
         
         return retval
 
 
-def pypair(parameters,way):
+def pypair(parameters,way, filter = {}):
     # main function
     fullcomb = list(itertools.product(*parameters))
-    coverageObj = Coverage(getCoverage(parameters,way), way)
+    coverageObj = Coverage(getCoverage(parameters,way), way, filter)
     Test_cases = executor(fullcomb, coverageObj)
 
     return Test_cases

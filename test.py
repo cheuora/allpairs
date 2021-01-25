@@ -8,6 +8,7 @@ parameters = [ [ "Brand X", "Brand Y","Brand A" ]
              , ['This', 'That']
              ]
 
+filter = {"Brand X" : ["XP"], "Brand Y" : ["NT","Modem"]}
 
 def test_twoway():
     assert pypair(parameters,2) == [('Brand X', 'NT', 'Internal', 'This')
@@ -39,6 +40,16 @@ def test_threeway():
                                     , ('Brand Y', 'XP', 'Modem', 'That')
                                     , ('Brand A', '2000', 'Internal', 'This')
                                     , ('Brand A', '2000', 'Modem', 'That')]
+
+def test_filtered_twoway():
+    assert pypair(parameters,2,filter) == [('Brand X', 'NT', 'Internal', 'This')
+                                    ,('Brand X', '2000', 'Modem', 'That')
+                                    ,('Brand Y', 'XP', 'Internal', 'That')
+                                    ,('Brand A', 'XP', 'Modem', 'This')
+                                    ,('Brand Y', '2000', 'Internal', 'This')
+                                    ,('Brand A', 'NT', 'Internal', 'That')
+                                    ,('Brand X', 'NT', 'Modem', 'This')
+                                    ,('Brand A', '2000', 'Internal', 'This')]
 
 
 # def test_searchCoverageItem(ttt):
