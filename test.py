@@ -52,13 +52,4 @@ def test_filtered_twoway():
                                     ,('Brand A', '2000', 'Internal', 'This')]
 
 
-# def test_searchCoverageItem(ttt):
-#     # ('Brand X', '2000')의 위치 반환
-#     assert ttt.searchCoverageItem(('Brand X', '2000')) == (0,2)
-
-
-
-# def test_updateCoverage(ttt):
-#     ttt.updateCoverage((0,2)) #(0,2)에 해당하는 ('Brand X', '2000') 의 삭제 
-#     assert ttt.searchCoverageItem(('Brand X', '2000')) == False
 
