@@ -24,11 +24,12 @@ def executor(fullcomb, coverageObj):
         selectedCaseIndex = []
         for selectedIndex, value in enumerate(fullcomb):
             bingo = coverageObj.checkCoverage(value)
-            if (len(bingo) == i):
-                selectedCaseIndex.append(selectedIndex)
-                for items in bingo:
-                    if items:
-                        remainedCoverage =  coverageObj.updateCoverage(items)
+            if (len(bingo) >= i):
+                if (fullcomb[selectedIndex] not in coverageObj.nonDictFilter) :
+                    selectedCaseIndex.append(selectedIndex)
+                    for items in bingo:
+                        if items:
+                            remainedCoverage =  coverageObj.updateCoverage(items)
 
 
         for case_index in selectedCaseIndex:
@@ -46,10 +47,12 @@ def executor(fullcomb, coverageObj):
 
 class Coverage:
     originCoverage = ''
-    def __init__(self, coverageAll, num_of_way, filter):
+    def __init__(self, coverageAll, num_of_way, filter, nonDictFilter):
         Coverage.originCoverage = coverageAll
         self.num_of_way = num_of_way
         self.filter = filter
+        #MCDC필터는 filter구조로 거르지 못하는 구조를 2by2 list로 만든 필터임. Optional Filter임. 
+        self.nonDictFilter = nonDictFilter
 
     def updateCoverage(self,coordinate):
         # 인덱스(x,y)에 맞는 커버리지 list배열(2x2)배열을 삭제 및 업데이트
@@ -59,7 +62,7 @@ class Coverage:
 
     def searchCoverageItem(self, itemVal):
         # 커버리지 list배열(2x2)에서 item을 찾아 인덱스를(x,y) return
-        # 못찾으면 null return
+        # 못찾으면 [] return
 
         x = 0
         y = 0
@@ -72,13 +75,20 @@ class Coverage:
                 retval.append((x,y))
 
         return retval
+        
     def checkFilter(self, one_combinations_case):
         try:
-            tmp = self.filter[one_combinations_case[0]]
-            isIn = tmp.count(one_combinations_case[1])
+            #one_combinations_case의 type이 list이면 tuple로 변환
+            if isinstance(one_combinations_case[0],list) and isinstance(one_combinations_case[0],list):    
+                tmp = self.filter[one_combinations_case[0][0]]
+                isIn = tmp.count(one_combinations_case[1])
+            else:
+                tmp = self.filter[one_combinations_case[0]]
+                isIn = tmp.count(one_combinations_case[1])
+
             if isIn > 0 :
                 return False
-            
+                
         except KeyError:
             pass
     
@@ -91,18 +101,19 @@ class Coverage:
         for i in combinations_case:
             if self.checkFilter(i):
                 searchResult = self.searchCoverageItem(i)
-                if (searchResult):
+                if (searchResult): 
                     retval = retval + searchResult
             else:
-                pass
+                #pass
+                break
         
         return retval
 
 
-def pypair(parameters,way, filter = {}):
+def pypair(parameters,way, filter = {}, nonDictFilter=[]):
     # main function
     fullcomb = list(itertools.product(*parameters))
-    coverageObj = Coverage(getCoverage(parameters,way), way, filter)
+    coverageObj = Coverage(getCoverage(parameters,way), way, filter, nonDictFilter)
     Test_cases = executor(fullcomb, coverageObj)
 
     return Test_cases
