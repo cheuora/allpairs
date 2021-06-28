@@ -57,7 +57,12 @@ class Coverage:
     def updateCoverage(self,coordinate):
         # 인덱스(x,y)에 맞는 커버리지 list배열(2x2)배열을 삭제 및 업데이트
         # 남아 있는 item수를 항상 return
-        Coverage.originCoverage[coordinate[0]].pop(coordinate[1])
+        try:
+            Coverage.originCoverage[coordinate[0]].pop(coordinate[1])
+        except IndexError:
+            #pop index error면 Pass
+            pass
+
         return itemCount2by2(Coverage.originCoverage)
 
     def searchCoverageItem(self, itemVal):
