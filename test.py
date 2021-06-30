@@ -89,7 +89,9 @@ nonDictFilter = [(['TRUE,FALSE,TRUE'], ['TRUE,TRUE'], ['-']),
 
 def test_nonfilter_twoway():
     assert pypair(parameters_bool,2,nonDictFilter=nonDictFilter) == [(['TRUE,FALSE,TRUE'], ['TRUE,TRUE'], ['TRUE,TRUE']), 
-						(['TRUE,FALSE,TRUE'], ['FALSE,FALSE'], ['-']), 
-						(['FALSE,FALSE,FALSE'], ['-'], ['-']), 
-						(['FALSE,TRUE,TRUE'], ['TRUE,TRUE'], ['FALSE,FALSE']), 
-						(['FALSE,TRUE,TRUE'], ['FALSE,FALSE'], ['-'])]
+    (['TRUE,FALSE,TRUE'], ['TRUE,TRUE'], ['FALSE,FALSE']), 
+    (['TRUE,FALSE,TRUE'], ['FALSE,FALSE'], ['-']), 
+    (['FALSE,FALSE,FALSE'], ['-'], ['-']), 
+    (['FALSE,TRUE,TRUE'], ['TRUE,TRUE'], ['TRUE,TRUE']), 
+    (['FALSE,TRUE,TRUE'], ['TRUE,TRUE'], ['FALSE,FALSE']), 
+    (['FALSE,TRUE,TRUE'], ['FALSE,FALSE'], ['-'])]
